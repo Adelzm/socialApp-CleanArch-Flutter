@@ -1,7 +1,12 @@
 import 'dart:async';
-import 'package:go_router/go_router.dart';
+
 import 'package:flutter/material.dart';
-import 'package:social_media_clean_archi/main.dart';
+import 'package:go_router/go_router.dart';
+import 'package:social_media_clean_archi/src/features/auth/presentation/views/signup_screen.dart';
+import 'package:social_media_clean_archi/src/features/feed/presentation/views/discover_screen.dart';
+import 'package:social_media_clean_archi/src/features/feed/presentation/views/feed_screen.dart';
+
+import '../features/auth/presentation/views/signin_screen.dart';
 
 class AppRouter {
   
@@ -15,14 +20,13 @@ class AppRouter {
         name: 'feed',
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          // TODO: Change to feed screen.
-          return const HomeScreen();
+          return const FeedScreen();
         }),
           GoRoute(
             name: 'discover',
             path: '/discover',
             builder: (BuildContext context, GoRouterState state) {
-              return Container();
+              return const DiscoverScreen();
             },
             routes: [
               GoRoute(
@@ -35,17 +39,17 @@ class AppRouter {
             ]
           ),
           GoRoute(
-            name: 'login',
-            path: '/login',
+            name: 'signin',
+            path: '/signin',
             builder: (BuildContext context, GoRouterState state) {
-              return Container();
+              return const SignInScreen();
             },
             routes: [
               GoRoute(
                 name: 'signup',
-                path: ':singup',
+                path: 'singup',
                 builder: (BuildContext context, GoRouterState state) {
-                  return Container();
+                  return const SignUpScreen();
                 }
                 )
             ]
