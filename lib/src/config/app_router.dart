@@ -9,7 +9,6 @@ import 'package:social_media_clean_archi/src/features/feed/presentation/views/fe
 import '../features/auth/presentation/views/signin_screen.dart';
 
 class AppRouter {
-  
   // ToDo: Add the auth bloc as an input
   AppRouter();
 
@@ -17,43 +16,39 @@ class AppRouter {
   late final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
-        name: 'feed',
-        path: '/',
-        builder: (BuildContext context, GoRouterState state) {
-          return const FeedScreen();
-        }),
-          GoRoute(
-            name: 'discover',
-            path: '/discover',
-            builder: (BuildContext context, GoRouterState state) {
-              return const DiscoverScreen();
-            },
-            routes: [
-              GoRoute(
+          name: 'feed',
+          path: '/feed',
+          builder: (BuildContext context, GoRouterState state) {
+            return const FeedScreen();
+          }),
+      GoRoute(
+          name: 'discover',
+          path: '/discover',
+          builder: (BuildContext context, GoRouterState state) {
+            return const DiscoverScreen();
+          },
+          routes: [
+            GoRoute(
                 name: 'user',
                 path: ':userId',
                 builder: (BuildContext context, GoRouterState state) {
                   return Container();
-                }
-                )
-            ]
-          ),
-          GoRoute(
-            name: 'signin',
-            path: '/signin',
-            builder: (BuildContext context, GoRouterState state) {
-              return const SignInScreen();
-            },
-            routes: [
-              GoRoute(
+                })
+          ]),
+      GoRoute(
+          name: 'signin',
+          path: '/',
+          builder: (BuildContext context, GoRouterState state) {
+            return const SignInScreen();
+          },
+          routes: [
+            GoRoute(
                 name: 'signup',
                 path: 'singup',
                 builder: (BuildContext context, GoRouterState state) {
                   return const SignUpScreen();
-                }
-                )
-            ]
-          ),
+                })
+          ]),
     ],
     // TODO: Redirect users to the login screen if they are not
     // authenticated. Else, go to the feed screen.
