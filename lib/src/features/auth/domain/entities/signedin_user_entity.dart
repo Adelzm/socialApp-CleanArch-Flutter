@@ -1,10 +1,10 @@
 import 'package:formz/formz.dart';
-import 'package:social_media_clean_archi/src/shared/domain/entities/user.dart';
+import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.dart';
 
-class SignedInUser extends User {
+class SignedInUserEntity extends UserEntity {
   final Email? email;
 
-  const SignedInUser(
+  const SignedInUserEntity(
       {required super.id,
       required super.username,
       required this.email,
@@ -13,15 +13,15 @@ class SignedInUser extends User {
       super.imagePath});
 
   static const empty =
-      SignedInUser(id: '_', username: Username.pure(), email: Email.pure());
+      SignedInUserEntity(id: '_', username: Username.pure(), email: Email.pure());
 
   @override
   List<Object?> get props =>
       [id, username, email, followrs, followings, imagePath];
 
-  SignedInUser copyWith(String? id, Username? username, Email? email,
+  SignedInUserEntity copyWith(String? id, Username? username, Email? email,
       int? followings, int? followrs, String? imagePath) {
-    return SignedInUser(
+    return SignedInUserEntity(
       id: id ?? this.id,
       username: username ?? this.username,
       email: email ?? this.email,

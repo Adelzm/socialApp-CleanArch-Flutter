@@ -1,21 +1,21 @@
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 
-class User extends Equatable {
+class UserEntity extends Equatable {
   final String id;
   final Username username;
   final int followrs;
   final int followings;
   final String? imagePath;
 
-  const User(
+  const UserEntity(
       {required this.id,
       required this.username,
       this.followrs = 0,
       this.followings = 0,
       this.imagePath});
 
-  static const empty = User(id: 'user_0', username: Username.pure());
+  static const empty = UserEntity(id: 'user_0', username: Username.pure());
 
   @override
   List<Object?> get props => [id, username, followrs, followings, imagePath];
