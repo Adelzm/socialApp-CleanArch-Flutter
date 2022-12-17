@@ -20,7 +20,7 @@ class SigninUserParams extends Params {
   final Username username;
   final Password password;
 
-  SigninUserParams(this.username, this.password);
+  SigninUserParams({required this.username,required this.password});
 
   @override
   List<Object?> get props => [username, password];
