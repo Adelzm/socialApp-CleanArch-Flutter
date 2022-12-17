@@ -19,8 +19,8 @@ class SignedInUserEntity extends UserEntity {
   List<Object?> get props =>
       [id, username, email, followrs, followings, imagePath];
 
-  SignedInUserEntity copyWith(String? id, Username? username, Email? email,
-      int? followings, int? followrs, String? imagePath) {
+  SignedInUserEntity copyWith({String? id, Username? username, Email? email,
+      int? followings, int? followrs, String? imagePath}) {
     return SignedInUserEntity(
       id: id ?? this.id,
       username: username ?? this.username,
