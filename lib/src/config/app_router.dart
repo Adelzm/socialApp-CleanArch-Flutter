@@ -2,22 +2,24 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:social_media_clean_archi/src/features/auth/presentation/views/signup_screen.dart';
-import 'package:social_media_clean_archi/src/features/feed/presentation/views/discover_screen.dart';
-import 'package:social_media_clean_archi/src/features/feed/presentation/views/feed_screen.dart';
 
+import '../features/auth/data/datasource/mock_auth_datasource.dart';
+import '../features/auth/presentation/blocs/auth/auth_bloc.dart';
 import '../features/auth/presentation/views/signin_screen.dart';
+import '../features/auth/presentation/views/signup_screen.dart';
+import '../features/feed/presentation/views/discover_screen.dart';
+import '../features/feed/presentation/views/feed_screen.dart';
 
 class AppRouter {
-  // ToDo: Add the auth bloc as an input
-  AppRouter();
+  final AuthBloc authBloc;
+  AppRouter(this.authBloc);
 
   /// The route configuration.
   late final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
           name: 'feed',
-          path: '/feed',
+          path: '/',
           builder: (BuildContext context, GoRouterState state) {
             return const FeedScreen();
           }),
@@ -37,22 +39,42 @@ class AppRouter {
           ]),
       GoRoute(
           name: 'signin',
-          path: '/',
+          path: '/signin',
           builder: (BuildContext context, GoRouterState state) {
             return const SignInScreen();
           },
           routes: [
             GoRoute(
                 name: 'signup',
-                path: 'singup',
+                path: 'signup',
                 builder: (BuildContext context, GoRouterState state) {
                   return const SignUpScreen();
                 })
           ]),
     ],
-    // TODO: Redirect users to the login screen if they are not
-    // authenticated. Else, go to the feed screen.
-    //redirect:
+    redirect: (BuildContext context, GoRouterState state) {
+      const signinLocation = '/signin';
+      const signupLocation = '/signin/signup';
+
+      final bool isSignedIn = authBloc.state.status == AuthStatus.authenticated;
+
+      final isSigningIn = state.subloc == signinLocation;
+      final isSigningUp = state.subloc == signupLocation;
+
+      if (!isSignedIn && !isSigningIn && !isSigningUp) {
+        return '/signin';
+      }
+
+      if (isSignedIn && isSigningIn) {
+        return '/';
+      }
+
+      if (isSignedIn && isSigningUp) {
+        return '/';
+      }
+     return null;
+    },
+    refreshListenable: GoRouterRefreshStream(authBloc.stream),
   );
 }
 

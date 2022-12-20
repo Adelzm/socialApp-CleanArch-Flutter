@@ -4,7 +4,7 @@ import 'package:formz/formz.dart';
 import 'package:social_media_clean_archi/src/features/auth/data/datasource/mock_auth_datasource.dart';
 
 import '../../../../../shared/domain/entities/user_entity.dart';
-import '../../../domain/entities/signedin_user_entity.dart';
+import '../../../domain/entities/signed_in_user_entity.dart';
 import '../../../domain/usecases/signin_user.dart';
 
 part 'signin_state.dart';
@@ -38,7 +38,7 @@ class SigninCubit extends Cubit<SigninState> {
   }
 
   Future<void> signInWithCredentials() async {
-    if (!state.status.isValid) return;
+    if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       await _signinUser(

@@ -7,8 +7,10 @@ import 'package:social_media_clean_archi/src/features/auth/domain/usecases/get_a
 import 'package:social_media_clean_archi/src/features/auth/domain/usecases/get_signedin_user.dart';
 import 'package:social_media_clean_archi/src/features/auth/domain/usecases/signin_user.dart';
 import 'package:social_media_clean_archi/src/features/auth/domain/usecases/signout_user.dart';
+import 'package:social_media_clean_archi/src/features/auth/domain/usecases/signup_user.dart';
 import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/signin/signin_cubit.dart';
+import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/signup/signup_cubit.dart';
 
 import 'src/config/app_theme.dart';
 import 'src/features/auth/presentation/views/signin_screen.dart';
@@ -49,12 +51,19 @@ class MyApp extends StatelessWidget {
               signinUser: SigninUser(context.read<AuthRepositoryImpl>()),
             ),
           ),
+          BlocProvider(
+            create: (context) => SignupCubit(
+              signupUser: SignupUser(context.read<AuthRepositoryImpl>()),
+            ),
+          ),
         ],
-        child: MaterialApp.router(
-          title: 'Flutter Demo',
-          theme: CustomTheme().theme(),
-          routerConfig: AppRouter().router,
-        ),
+        child: Builder(builder: (context) {
+          return MaterialApp.router(
+            title: 'Flutter Demo',
+            theme: CustomTheme().theme(),
+            routerConfig: AppRouter(context.read<AuthBloc>()).router,
+          );
+        }),
       ),
     );
   }

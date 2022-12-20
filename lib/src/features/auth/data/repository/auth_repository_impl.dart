@@ -2,10 +2,10 @@ import 'package:social_media_clean_archi/src/features/auth/domain/repository/aut
 
 import '../../../../shared/domain/entities/user_entity.dart';
 import '../../data/datasource/mock_auth_datasource.dart';
-import '../../domain/entities/signedin_user_entity.dart';
+import '../../domain/entities/signed_in_user_entity.dart';
 
-// The role of the repo is to decide which data source to use
-// since we have only one data source, we have a one to one match
+// The role of the repo is to aggregate data form different data sources.
+// Since we have only one data source, we have a one to one match
 // between the data source and the repo.
 class AuthRepositoryImpl extends AuthRepository {
   final MockAuthDatasource authDatasource;

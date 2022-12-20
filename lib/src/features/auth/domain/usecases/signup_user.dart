@@ -1,4 +1,4 @@
-import 'package:social_media_clean_archi/src/features/auth/domain/entities/signedin_user_entity.dart';
+import 'package:social_media_clean_archi/src/features/auth/domain/entities/signed_in_user_entity.dart';
 import 'package:social_media_clean_archi/src/features/auth/domain/repository/auth_repository.dart';
 import 'package:social_media_clean_archi/src/shared/domain/usecases/usecases.dart';
 
@@ -17,7 +17,7 @@ class SignupUser implements UseCase<void, SignupUserParams> {
 class SignupUserParams extends Params {
   final SignedInUserEntity user;
 
-  SignupUserParams(this.user);
+  SignupUserParams({required this.user});
 
   @override
   List<Object?> get props => [user];

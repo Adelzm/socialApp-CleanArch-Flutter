@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../shared/domain/usecases/usecases.dart';
 import '../../../data/datasource/mock_auth_datasource.dart';
-import '../../../domain/entities/signedin_user_entity.dart';
+import '../../../domain/entities/signed_in_user_entity.dart';
 import '../../../domain/usecases/get_auth_status.dart';
 import '../../../domain/usecases/get_signedin_user.dart';
 import '../../../domain/usecases/signout_user.dart';
@@ -32,6 +32,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         super(const AuthState.unknown()) {
     on<AuthGetStatus>(_onAuthGetStatus);
     on<AuthSignOutUser>(_onAuthSignoutUser);
+
+    _authStatusSubscription = _getAuthStatus(NoParams()).listen((status) {
+      add(AuthGetStatus(status));
+    });
   }
 
   Future<void> _onAuthGetStatus(
@@ -56,7 +60,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignOutUser event,
     Emitter<AuthState> emit,
   ) async {
-    debugPrint('Strt user logout with _onauthLogoutUser');
+    debugPrint('User logout with _onauthLogoutUser');
     await _signoutUser(NoParams());
     emit(const AuthState.unauthenticated());
   }
@@ -67,3 +71,5 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return super.close();
   }
 }
+
+

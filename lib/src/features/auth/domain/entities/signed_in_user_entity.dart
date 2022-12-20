@@ -12,15 +12,20 @@ class SignedInUserEntity extends UserEntity {
       super.followrs,
       super.imagePath});
 
-  static const empty =
-      SignedInUserEntity(id: '_', username: Username.pure(), email: Email.pure());
+  static const empty = SignedInUserEntity(
+      id: '_', username: Username.pure(), email: Email.pure());
 
   @override
   List<Object?> get props =>
       [id, username, email, followrs, followings, imagePath];
 
-  SignedInUserEntity copyWith({String? id, Username? username, Email? email,
-      int? followings, int? followrs, String? imagePath}) {
+  SignedInUserEntity copyWith(
+      {String? id,
+      Username? username,
+      Email? email,
+      int? followings,
+      int? followrs,
+      String? imagePath}) {
     return SignedInUserEntity(
       id: id ?? this.id,
       username: username ?? this.username,
@@ -43,7 +48,8 @@ class Email extends FormzInput<String, EmailValidationError> {
 
   // How we want the username to look like
   static final RegExp _emailRegExp = RegExp(
-      r'^[a-zA-Z0-9.!#$%&*+/=?^_`~{}|-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9-]+)*$');
+    r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
+  );
 
   @override
   EmailValidationError? validator(String value) {
@@ -61,7 +67,7 @@ class Password extends FormzInput<String, PasswordValidationError> {
   const Password.dirty([String value = '']) : super.dirty(value);
 
   // How we want the username to look like
-  static final RegExp _passwordRegExp =
+  static final _passwordRegExp =
       RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
 
   @override

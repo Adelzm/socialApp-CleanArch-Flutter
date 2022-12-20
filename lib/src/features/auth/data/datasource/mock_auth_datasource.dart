@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:social_media_clean_archi/src/features/auth/domain/entities/signedin_user_entity.dart';
+import 'package:social_media_clean_archi/src/features/auth/domain/entities/signed_in_user_entity.dart';
 import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.dart';
 
 enum AuthStatus { unknow, authenticated, unauthenticated }
@@ -88,7 +88,7 @@ class MockAuthDatasourceImpl extends MockAuthDatasource {
     );
   }
 
-  final List<UserEntity> _allUsers = [
+  final List<UserEntity>   _allUsers = [
     const UserEntity(
       id: 'user_1',
       username: Username.dirty('Massimo'),

@@ -1,4 +1,5 @@
-import 'package:social_media_clean_archi/src/features/auth/domain/entities/signedin_user_entity.dart';
+import 'package:social_media_clean_archi/src/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:social_media_clean_archi/src/features/auth/domain/entities/signed_in_user_entity.dart';
 import 'package:social_media_clean_archi/src/features/auth/domain/repository/auth_repository.dart';
 import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.dart';
 import 'package:social_media_clean_archi/src/shared/domain/usecases/usecases.dart';
