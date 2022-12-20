@@ -24,7 +24,7 @@ class UserModel {
     );
   }
 
-factory UserModel.fromEntity(UserEntity userEntity) {
+  factory UserModel.fromEntity(UserEntity userEntity) {
     return UserModel(
       id: userEntity.id,
       username: userEntity.username.value,
@@ -34,13 +34,13 @@ factory UserModel.fromEntity(UserEntity userEntity) {
     );
   }
 
-  UserEntity toEntity(UserModel userModel) {
+  UserEntity toEntity() {
     return UserEntity(
-      id: userModel.id,
-      username: Username.dirty(userModel.username),
-      imagePath: userModel.imagePath,
-      followings: userModel.followings,
-      followrs: userModel.followrs,
+      id: id,
+      username: Username.dirty(username),
+      imagePath: imagePath,
+      followings: followings,
+      followrs: followrs,
     );
   }
 }
