@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 10),
               _Password(),
               SizedBox(height: 10),
-              _SigninButton(),
+              _SignupButton(),
               Spacer(flex: 2),
               _SigninRedirect()
             ],
@@ -70,8 +70,8 @@ class _SigninRedirect extends StatelessWidget {
   }
 }
 
-class _SigninButton extends StatelessWidget {
-  const _SigninButton({
+class _SignupButton extends StatelessWidget {
+  const _SignupButton({
     Key? key,
   }) : super(key: key);
 
@@ -159,10 +159,10 @@ class _Email extends StatelessWidget {
       builder: (context, state) {
         return MainTextField(
           labelText: 'Email',
-          errorText: state.username.invalid ? 'The email is invalid' : null,
+          errorText: state.email.invalid ? 'The email is invalid' : null,
           keyboardType: TextInputType.emailAddress,
           onChange: (email) {
-            context.read<SignupCubit>().usernameChanged(email);
+            context.read<SignupCubit>().emailChanged(email);
           },
         );
       },
@@ -185,9 +185,9 @@ class _Password extends StatelessWidget {
         return MainTextField(
           labelText: 'Password',
           obscureText: true,
-          errorText: state.username.invalid ? 'The password is invalid' : null,
+          errorText: state.password.invalid ? 'The password is invalid' : null,
           onChange: (password) {
-            context.read<SignupCubit>().usernameChanged(password);
+            context.read<SignupCubit>().passwordChanged(password);
           },
         );
       },
