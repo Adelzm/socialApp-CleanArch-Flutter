@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:social_media_clean_archi/src/features/feed/presentation/bloc/feed_bloc.dart';
-import 'package:social_media_clean_archi/src/shared/presentation/widgets/custom_nav_bar.dart';
-import 'package:video_player/video_player.dart';
 
+import '../../../../shared/presentation/widgets/custom_nav_bar.dart';
 import '../../../../shared/presentation/widgets/custom_video_player.dart';
+import '../blocs/feed/feed_bloc.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});

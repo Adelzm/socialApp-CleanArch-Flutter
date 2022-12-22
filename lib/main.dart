@@ -13,6 +13,7 @@ import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/si
 import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/signup/signup_cubit.dart';
 import 'package:social_media_clean_archi/src/features/feed/data/datasources/mock_feed_data_source.dart';
 import 'package:social_media_clean_archi/src/features/feed/data/repo/post_repository_imp.dart';
+import 'package:social_media_clean_archi/src/features/feed/data/repo/user_repository_imp.dart';
 import 'package:social_media_clean_archi/src/features/feed/domain/repo/post_repository.dart';
 
 import 'src/config/app_theme.dart';
@@ -37,6 +38,11 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => PostRepositoryImp(
+            MockFeedDataSourceImpl(),
+          ),
+        ),
+         RepositoryProvider(
+          create: (context) => UserRepositoryImp(
             MockFeedDataSourceImpl(),
           ),
         )
