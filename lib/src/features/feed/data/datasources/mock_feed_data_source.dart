@@ -14,7 +14,7 @@ class MockFeedDataSourceImpl implements MockFeedDataSource {
     await Future.delayed(const Duration(microseconds: 300));
     return posts.map((post) {
       Map<String, dynamic> user = users.where((user) {
-        return user['id'] = post['userId'];
+        return user['id'] == post['userId'];
       }).first;
       return PostModel.fromJson(post, user).toEntity();
     }).toList();
@@ -27,7 +27,7 @@ class MockFeedDataSourceImpl implements MockFeedDataSource {
       return post['userId' == userId];
     }).map((post) {
       Map<String, dynamic> user = users.where((user) {
-        return user['id'] = post['userId'];
+        return user['id'] == post['userId'];
       }).first;
       return PostModel.fromJson(post, user).toEntity();
     }).toList();

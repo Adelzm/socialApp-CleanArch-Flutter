@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:social_media_clean_archi/src/features/feed/data/repo/post_repository_imp.dart';
+import 'package:social_media_clean_archi/src/features/feed/domain/usecases/get_posts.dart';
+import 'package:social_media_clean_archi/src/features/feed/presentation/bloc/feed_bloc.dart';
 
 import '../features/auth/data/datasource/mock_auth_datasource.dart';
 import '../features/auth/presentation/blocs/auth/auth_bloc.dart';
@@ -21,7 +25,14 @@ class AppRouter {
           name: 'feed',
           path: '/',
           builder: (BuildContext context, GoRouterState state) {
-            return const FeedScreen();
+            return BlocProvider(
+              create: (context) => FeedBloc(
+                getPosts: GetPosts(
+                  context.read<PostRepositoryImp>(),
+                ),
+              )..add(FeedGetPosts()),
+              child: const FeedScreen(),
+            );
           }),
       GoRoute(
           name: 'discover',
@@ -72,7 +83,7 @@ class AppRouter {
       if (isSignedIn && isSigningUp) {
         return '/';
       }
-     return null;
+      return null;
     },
     refreshListenable: GoRouterRefreshStream(authBloc.stream),
   );

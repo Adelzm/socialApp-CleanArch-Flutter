@@ -11,6 +11,9 @@ import 'package:social_media_clean_archi/src/features/auth/domain/usecases/signu
 import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/signin/signin_cubit.dart';
 import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/signup/signup_cubit.dart';
+import 'package:social_media_clean_archi/src/features/feed/data/datasources/mock_feed_data_source.dart';
+import 'package:social_media_clean_archi/src/features/feed/data/repo/post_repository_imp.dart';
+import 'package:social_media_clean_archi/src/features/feed/domain/repo/post_repository.dart';
 
 import 'src/config/app_theme.dart';
 import 'src/features/auth/presentation/views/signin_screen.dart';
@@ -28,8 +31,15 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (context) => AuthRepositoryImpl(MockAuthDatasourceImpl()),
+          create: (context) => AuthRepositoryImpl(
+            MockAuthDatasourceImpl(),
+          ),
         ),
+        RepositoryProvider(
+          create: (context) => PostRepositoryImp(
+            MockFeedDataSourceImpl(),
+          ),
+        )
       ],
       child: MultiBlocProvider(
         providers: [

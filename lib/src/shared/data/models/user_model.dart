@@ -20,7 +20,7 @@ class UserModel {
       username: json['username'],
       imagePath: json['imagePath'],
       followings: json['followings'],
-      followrs: json['followrs'],
+      followrs: json['followers'],
     );
   }
 
