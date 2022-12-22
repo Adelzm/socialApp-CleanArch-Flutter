@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_media_clean_archi/src/features/feed/presentation/bloc/feed_bloc.dart';
 import 'package:social_media_clean_archi/src/shared/presentation/widgets/custom_nav_bar.dart';
+import 'package:video_player/video_player.dart';
+
+import '../../../../shared/presentation/widgets/custom_video_player.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
@@ -14,9 +17,6 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Feed'),
-      ),
       bottomNavigationBar: const CustomNavBar(),
       body: BlocBuilder<FeedBloc, FeedState>(
         builder: (context, state) {
@@ -27,11 +27,18 @@ class _FeedScreenState extends State<FeedScreen> {
               ),
             );
           } else if (state is FeedLoaded) {
-            print(state.posts);
-            return const Center(
-              child: Text(
-                'Feed Loaded',
-                style: TextStyle(color: Colors.white),
+            return SingleChildScrollView(
+              child: ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                children: state.posts.map((post) {
+                  return CustomVideoPlayController(
+                    assetPath: post.assetPath,
+                    caption: post.caption,
+                    username: post.user.username.value,
+                  );
+                }).toList(),
               ),
             );
           } else {

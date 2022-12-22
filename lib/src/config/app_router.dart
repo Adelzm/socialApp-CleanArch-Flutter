@@ -63,28 +63,28 @@ class AppRouter {
                 })
           ]),
     ],
-    redirect: (BuildContext context, GoRouterState state) {
-      const signinLocation = '/signin';
-      const signupLocation = '/signin/signup';
+    // redirect: (BuildContext context, GoRouterState state) {
+    //   const signinLocation = '/signin';
+    //   const signupLocation = '/signin/signup';
 
-      final bool isSignedIn = authBloc.state.status == AuthStatus.authenticated;
+    //   final bool isSignedIn = authBloc.state.status == AuthStatus.authenticated;
 
-      final isSigningIn = state.subloc == signinLocation;
-      final isSigningUp = state.subloc == signupLocation;
+    //   final isSigningIn = state.subloc == signinLocation;
+    //   final isSigningUp = state.subloc == signupLocation;
 
-      if (!isSignedIn && !isSigningIn && !isSigningUp) {
-        return '/signin';
-      }
+    //   if (!isSignedIn && !isSigningIn && !isSigningUp) {
+    //     return '/signin';
+    //   }
 
-      if (isSignedIn && isSigningIn) {
-        return '/';
-      }
+    //   if (isSignedIn && isSigningIn) {
+    //     return '/';
+    //   }
 
-      if (isSignedIn && isSigningUp) {
-        return '/';
-      }
-      return null;
-    },
+    //   if (isSignedIn && isSigningUp) {
+    //     return '/';
+    //   }
+    //   return null;
+    // },
     refreshListenable: GoRouterRefreshStream(authBloc.stream),
   );
 }
