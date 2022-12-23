@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:social_media_clean_archi/src/features/content/presentation/views/add_content_screen.dart';
 
 import '../features/auth/presentation/blocs/auth/auth_bloc.dart';
 import '../features/auth/presentation/views/signin_screen.dart';
@@ -55,6 +56,12 @@ class AppRouter {
                   return Container();
                 })
           ]),
+      GoRoute(
+          name: 'add-content',
+          path: '/add-content',
+          builder: (BuildContext context, GoRouterState state) {
+            return const AddContentScreen();
+          }),
       GoRoute(
           name: 'signin',
           path: '/signin',
