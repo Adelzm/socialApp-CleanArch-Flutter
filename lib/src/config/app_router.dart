@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:social_media_clean_archi/src/features/feed/data/repo/user_repository_imp.dart';
-import 'package:social_media_clean_archi/src/features/feed/domain/usecases/get_users.dart';
-import 'package:social_media_clean_archi/src/features/feed/presentation/blocs/discover/discover_bloc.dart';
-import 'package:social_media_clean_archi/src/features/feed/presentation/blocs/feed/feed_bloc.dart';
 
 import '../features/auth/presentation/blocs/auth/auth_bloc.dart';
 import '../features/auth/presentation/views/signin_screen.dart';
 import '../features/auth/presentation/views/signup_screen.dart';
 import '../features/feed/data/repo/post_repository_imp.dart';
+import '../features/feed/data/repo/user_repository_imp.dart';
 import '../features/feed/domain/usecases/get_posts.dart';
+import '../features/feed/domain/usecases/get_users.dart';
+import '../features/feed/presentation/blocs/discover/discover_bloc.dart';
+import '../features/feed/presentation/blocs/feed/feed_bloc.dart';
 import '../features/feed/presentation/views/discover_screen.dart';
 import '../features/feed/presentation/views/feed_screen.dart';
 
@@ -42,9 +42,7 @@ class AppRouter {
           builder: (BuildContext context, GoRouterState state) {
             return BlocProvider(
               create: (context) => DiscoverBloc(
-                getUsers: GetUsers(
-                  context.read<UserRepositoryImp>(),
-                ),
+                getUsers: GetUsers(context.read<UserRepositoryImp>()),
               )..add(DiscoverGetUsers()),
               child: const DiscoverScreen(),
             );

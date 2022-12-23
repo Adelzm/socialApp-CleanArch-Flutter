@@ -14,6 +14,7 @@ class CustomTheme {
         titleMedium: TextStyle(color: Colors.white),
         titleSmall: TextStyle(color: Colors.white),
         bodyLarge: TextStyle(color: Colors.white),
+        bodyMedium: TextStyle(color: Colors.white),
         bodySmall: TextStyle(color: Colors.white),
       ),
       iconTheme: const IconThemeData(color: Colors.white),
