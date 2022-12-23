@@ -1,10 +1,19 @@
-import 'package:social_media_clean_archi/src/shared/data/models/user_model.dart';
-import 'package:social_media_clean_archi/src/shared/domain/entities/post_entity.dart';
+import 'package:hive/hive.dart';
 
+import '../../domain/entities/post_entity.dart';
+import 'user_model.dart';
+
+part 'post_model.g.dart';
+
+@HiveType(typeId: 1)
 class PostModel {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final UserModel userModel;
+  @HiveField(2)
   final String caption;
+  @HiveField(3)
   final String assetPath;
 
   PostModel(

@@ -1,10 +1,20 @@
-import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.dart';
+import 'package:hive/hive.dart';
 
+import '../../domain/entities/user_entity.dart';
+
+part 'user_model.g.dart';
+
+@HiveType(typeId: 0)
 class UserModel {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String username;
+  @HiveField(2)
   final int followrs;
+  @HiveField(3)
   final int followings;
+  @HiveField(4)
   final String? imagePath;
 
   const UserModel(
