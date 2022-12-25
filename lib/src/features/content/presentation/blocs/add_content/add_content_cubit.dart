@@ -14,7 +14,7 @@ class AddContentCubit extends Cubit<AddContentState> {
         video: file, addContentStatus: AddContentStatus.loading));
   }
 
-  void caotionChanged(String caption) {
+  void captionChanged(String caption) {
     emit(state.copyWith(
         caption: caption, addContentStatus: AddContentStatus.loading));
   }
