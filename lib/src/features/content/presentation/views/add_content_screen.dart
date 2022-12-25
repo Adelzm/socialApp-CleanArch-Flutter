@@ -1,9 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
+import 'package:social_media_clean_archi/src/shared/presentation/widgets/widgets.dart';
+
+import '../blocs/add_content/add_content_cubit.dart';
 
 class AddContentScreen extends StatelessWidget {
   const AddContentScreen({super.key});
@@ -14,29 +18,51 @@ class AddContentScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Add Content'),
         backgroundColor: Colors.black,
-      ),
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () async {
-              _handleVideo();
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.read<AddContentCubit>().reset();
             },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-            child: Text(
-              'Select a Video',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(fontWeight: FontWeight.w500),
-            ),
+            icon: const Icon(Icons.clear),
           ),
         ],
+      ),
+      backgroundColor: Colors.white,
+      body: BlocConsumer<AddContentCubit, AddContentState>(
+        buildWhen: (previous, current) => previous.video != current.video,
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          if (state.video == null) {
+            return Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  _handleVideo().then((video) {
+                    if (video != null) {
+                      context.read<AddContentCubit>().videoChanged(video);
+                    }
+                  });
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                child: Text(
+                  'Select a Video',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontWeight: FontWeight.w500),
+                ),
+              ),
+            );
+          } else {
+            return CustomVideoPlayController(assetPath: state.video!.path);
+          }
+        },
       ),
     );
   }
 
-  Future<void> _handleVideo() async {
+  Future<File?> _handleVideo() async {
     XFile? uploadVideo =
         await ImagePicker().pickVideo(source: ImageSource.gallery);
 
@@ -45,10 +71,10 @@ class AddContentScreen extends StatelessWidget {
     }
 
     final directory = await getApplicationDocumentsDirectory();
-    final fileName = basename(uploadVideo.path);
+    final fileName = p.basename(uploadVideo.path);
     final savedVideo =
         await File(uploadVideo.path).copy('${directory.path}/$fileName');
 
-    print(savedVideo);
+    return savedVideo;
   }
 }
