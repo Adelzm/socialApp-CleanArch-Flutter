@@ -5,31 +5,31 @@ enum AddContentStatus { intial, loading, success, error }
 class AddContentState extends Equatable {
   final File? video;
   final String caption;
-  final AddContentStatus addContentStatus;
+  final AddContentStatus status;
 
   const AddContentState({
     required this.video,
     required this.caption,
-    required this.addContentStatus,
+    required this.status,
   });
 
   factory AddContentState.initialize() {
     return const AddContentState(
       video: null,
       caption: '',
-      addContentStatus: AddContentStatus.intial,
+      status: AddContentStatus.intial,
     );
   }
 
   AddContentState copyWith(
-      {File? video, String? caption, AddContentStatus? addContentStatus}) {
+      {File? video, String? caption, AddContentStatus? status}) {
     return AddContentState(
       video: video ?? this.video,
       caption: caption ?? this.caption,
-      addContentStatus: addContentStatus ?? this.addContentStatus,
+      status: status ?? this.status,
     );
   }
 
   @override
-  List<Object?> get props => [video, caption, addContentStatus];
+  List<Object?> get props => [video, caption, status];
 }

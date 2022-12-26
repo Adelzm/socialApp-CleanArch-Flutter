@@ -43,7 +43,7 @@ class CustomNavBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              context.read<AuthBloc>().add(AuthSignOutUser());
+              context.goNamed('profile');
             },
             iconSize: 30,
             icon: const Icon(Icons.person),

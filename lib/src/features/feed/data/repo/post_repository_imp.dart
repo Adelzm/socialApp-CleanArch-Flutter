@@ -30,4 +30,9 @@ class PostRepositoryImp implements PostRepository {
   Future<List<PostEntity>> getPostByUser(userId) async {
     return mockFeedDataSource.getPostsByUser(userId);
   }
+
+  @override
+  Future<void> createPost(PostEntity post) {
+    return localFeedDatasource.addPosts(post);
+  }
 }
