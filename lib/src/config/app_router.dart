@@ -7,7 +7,7 @@ import 'package:social_media_clean_archi/src/features/auth/data/datasource/mock_
 import 'package:social_media_clean_archi/src/features/content/domain/usecases/create_post.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/blocs/add_content/add_content_cubit.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/views/add_content_screen.dart';
-import 'package:social_media_clean_archi/src/features/content/presentation/views/manage_content_screen.dart';
+import 'package:social_media_clean_archi/src/features/content/presentation/views/profile_screen.dart';
 
 import '../features/auth/presentation/blocs/auth/auth_bloc.dart';
 import '../features/auth/presentation/views/signin_screen.dart';
