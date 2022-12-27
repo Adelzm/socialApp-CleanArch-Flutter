@@ -30,7 +30,7 @@ class AppRouter {
     routes: <RouteBase>[
       GoRoute(
           name: 'feed',
-          path: '/',
+          path: '/feed',
           builder: (BuildContext context, GoRouterState state) {
             return BlocProvider(
               create: (context) => FeedBloc(
@@ -75,7 +75,7 @@ class AppRouter {
           }),
       GoRoute(
           name: 'profile',
-          path: '/profile',
+          path: '/',
           builder: (BuildContext context, GoRouterState state) {
             return const ProfileScreen();
           }),

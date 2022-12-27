@@ -9,7 +9,7 @@ class SignedInUserEntity extends UserEntity {
       required super.username,
       required this.email,
       super.followings,
-      super.followrs,
+      super.followers,
       super.imagePath});
 
   static const empty = SignedInUserEntity(
@@ -17,7 +17,7 @@ class SignedInUserEntity extends UserEntity {
 
   @override
   List<Object?> get props =>
-      [id, username, email, followrs, followings, imagePath];
+      [id, username, email, followers, followings, imagePath];
 
   SignedInUserEntity copyWith(
       {String? id,
@@ -31,7 +31,7 @@ class SignedInUserEntity extends UserEntity {
       username: username ?? this.username,
       email: email ?? this.email,
       followings: followings ?? this.followings,
-      followrs: followrs ?? this.followrs,
+      followers: followrs ?? this.followers,
       imagePath: imagePath ?? this.imagePath,
     );
   }
