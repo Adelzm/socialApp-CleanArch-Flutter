@@ -1,16 +1,5 @@
 # social_media_clean_archi
+## Summary
+This project demonstrates the implementation of Clean Architecture principles in a Flutter application, with the use of Bloc for state management, goRouter for navigation, and Hive for local data storage.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project is based on [The Clean Architecture Course from @MaxOnFlutter](https://maxonflutter.teachable.com)
