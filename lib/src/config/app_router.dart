@@ -6,8 +6,10 @@ import 'package:go_router/go_router.dart';
 import 'package:social_media_clean_archi/src/features/auth/data/datasource/mock_auth_datasource.dart';
 import 'package:social_media_clean_archi/src/features/content/domain/usecases/create_post.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/blocs/add_content/add_content_cubit.dart';
+import 'package:social_media_clean_archi/src/features/content/presentation/blocs/manage_content/manage_content_bloc.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/views/add_content_screen.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/views/profile_screen.dart';
+import 'package:social_media_clean_archi/src/features/feed/domain/usecases/get_posts_by_user_id.dart';
 
 import '../features/auth/presentation/blocs/auth/auth_bloc.dart';
 import '../features/auth/presentation/views/signin_screen.dart';
@@ -30,7 +32,7 @@ class AppRouter {
     routes: <RouteBase>[
       GoRoute(
           name: 'feed',
-          path: '/feed',
+          path: '/',
           builder: (BuildContext context, GoRouterState state) {
             return BlocProvider(
               create: (context) => FeedBloc(
@@ -75,9 +77,19 @@ class AppRouter {
           }),
       GoRoute(
           name: 'profile',
-          path: '/',
+          path: '/profile',
           builder: (BuildContext context, GoRouterState state) {
-            return const ProfileScreen();
+            return BlocProvider(
+              create: (context) => ManageContentBloc(
+                getPostsByUser: GetPostsByUser(
+                  context.read<PostRepositoryImp>(),
+                ),
+              )..add(
+                  GetPostByUserEvent(
+                      userId: context.read<AuthBloc>().state.user.id),
+                ),
+              child: const ProfileScreen(),
+            );
           }),
       GoRoute(
           name: 'signin',
@@ -94,28 +106,28 @@ class AppRouter {
                 })
           ]),
     ],
-    // redirect: (BuildContext context, GoRouterState state) {
-    //   const signinLocation = '/signin';
-    //   const signupLocation = '/signin/signup';
+    redirect: (BuildContext context, GoRouterState state) {
+      const signinLocation = '/signin';
+      const signupLocation = '/signin/signup';
 
-    //   final bool isSignedIn = authBloc.state.status == AuthStatus.authenticated;
+      final bool isSignedIn = authBloc.state.status == AuthStatus.authenticated;
 
-    //   final isSigningIn = state.subloc == signinLocation;
-    //   final isSigningUp = state.subloc == signupLocation;
+      final isSigningIn = state.subloc == signinLocation;
+      final isSigningUp = state.subloc == signupLocation;
 
-    //   if (!isSignedIn && !isSigningIn && !isSigningUp) {
-    //     return '/signin';
-    //   }
+      if (!isSignedIn && !isSigningIn && !isSigningUp) {
+        return '/signin';
+      }
 
-    //   if (isSignedIn && isSigningIn) {
-    //     return '/';
-    //   }
+      if (isSignedIn && isSigningIn) {
+        return '/';
+      }
 
-    //   if (isSignedIn && isSigningUp) {
-    //     return '/';
-    //   }
-    //   return null;
-    // },
+      if (isSignedIn && isSigningUp) {
+        return '/';
+      }
+      return null;
+    },
     refreshListenable: GoRouterRefreshStream(authBloc.stream),
   );
 }
