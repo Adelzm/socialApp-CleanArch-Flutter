@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:social_media_clean_archi/src/features/chat/data/models/chat_model.dart';
+import 'package:social_media_clean_archi/src/features/chat/data/models/message_model.dart';
 import 'package:social_media_clean_archi/src/features/feed/data/datasources/local_feed_datasource.dart';
 import 'package:social_media_clean_archi/src/shared/data/models/post_model.dart';
 import 'package:social_media_clean_archi/src/shared/data/models/user_model.dart';
@@ -26,6 +28,8 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(PostModelAdapter());
+  Hive.registerAdapter(MessageModelAdapter());
+  Hive.registerAdapter(ChatModelAdapter());
   runApp(const MyApp());
 }
 

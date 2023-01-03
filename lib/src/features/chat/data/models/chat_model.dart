@@ -1,13 +1,20 @@
-import 'package:social_media_clean_archi/src/features/chat/data/models/message_model.dart';
-import 'package:social_media_clean_archi/src/features/chat/domain/entities/chat_entity.dart';
-import 'package:social_media_clean_archi/src/features/chat/domain/entities/message_entity.dart';
-import 'package:social_media_clean_archi/src/shared/data/models/user_model.dart';
-import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../../shared/data/models/user_model.dart';
+import '../../domain/entities/chat_entity.dart';
+import 'message_model.dart';
+
+part 'chat_model.g.dart';
+
+@HiveType(typeId: 3)
 class ChatModel {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final UserModel currentUser;
+  @HiveField(2)
   final UserModel otherUser;
+  @HiveField(3)
   final List<MessageModel>? messages;
 
   const ChatModel({
