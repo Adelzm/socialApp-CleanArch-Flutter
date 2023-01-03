@@ -5,9 +5,10 @@ import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.
 
 abstract class LocalFeedDatasource {
   Future<void> addPosts(PostEntity post);
-  Future<void> deleteAllPosts();
   Future<List<PostEntity>> getPosts();
   Future<List<PostEntity>> getPostsByUser(String userId);
+  Future<void> deleteAllPosts();
+  Future<void> deletePostById(String postId);
 }
 
 class LocalFeedDatasourceImp implements LocalFeedDatasource {
@@ -32,10 +33,6 @@ class LocalFeedDatasourceImp implements LocalFeedDatasource {
     return box.values.toList().map((post) => post.toEntity()).toList();
   }
 
-  Future<Box> _openBox() async {
-    return Hive.openBox<PostModel>(boxName);
-  }
-
   @override
   Future<List<PostEntity>> getPostsByUser(String userId) async {
     Box<PostModel> box = await _openBox() as Box<PostModel>;
@@ -44,5 +41,15 @@ class LocalFeedDatasourceImp implements LocalFeedDatasource {
         .toList()
         .map((post) => post.toEntity())
         .toList();
+  }
+
+  @override
+  Future<void> deletePostById(String postId) async {
+    Box box = await _openBox();
+    await box.delete(postId);
+  }
+
+  Future<Box> _openBox() async {
+    return Hive.openBox<PostModel>(boxName);
   }
 }

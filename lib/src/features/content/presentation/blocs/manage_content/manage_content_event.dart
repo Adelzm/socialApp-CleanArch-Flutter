@@ -15,3 +15,12 @@ class GetPostByUserEvent extends ManageContentEvent {
   @override
   List<Object> get props => [userId];
 }
+
+class DeletePostEvent extends ManageContentEvent {
+  final PostEntity post;
+
+  const DeletePostEvent({required this.post});
+
+  @override
+  List<Object> get props => [post];
+}

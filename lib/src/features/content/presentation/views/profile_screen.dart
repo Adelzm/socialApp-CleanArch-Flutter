@@ -96,8 +96,16 @@ class ProfileScreen extends StatelessWidget {
                         childAspectRatio: 9 / 16,
                       ),
                       itemBuilder: (context, index) {
-                        return CustomVideoPlayer(
-                            assetPath: state.posts[index].assetPath);
+                        return InkWell(
+                          onDoubleTap: () {
+                            context.read<ManageContentBloc>().add(
+                                  DeletePostEvent(post: state.posts[index]),
+                                );
+                          },
+                          child: CustomVideoPlayer(
+                              key: UniqueKey(),
+                              assetPath: state.posts[index].assetPath),
+                        );
                       },
                     ),
                     Text('Tab 2'),

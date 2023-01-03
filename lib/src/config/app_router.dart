@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:social_media_clean_archi/src/features/auth/data/datasource/mock_auth_datasource.dart';
 import 'package:social_media_clean_archi/src/features/content/domain/usecases/create_post.dart';
+import 'package:social_media_clean_archi/src/features/content/domain/usecases/delete_post.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/blocs/add_content/add_content_cubit.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/blocs/manage_content/manage_content_bloc.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/views/add_content_screen.dart';
@@ -82,6 +83,9 @@ class AppRouter {
             return BlocProvider(
               create: (context) => ManageContentBloc(
                 getPostsByUser: GetPostsByUser(
+                  context.read<PostRepositoryImp>(),
+                ),
+                deletePostById: DeletePostById(
                   context.read<PostRepositoryImp>(),
                 ),
               )..add(

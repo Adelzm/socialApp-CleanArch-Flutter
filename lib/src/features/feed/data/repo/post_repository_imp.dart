@@ -45,4 +45,10 @@ class PostRepositoryImp implements PostRepository {
   Future<void> createPost(PostEntity post) {
     return localFeedDatasource.addPosts(post);
   }
+
+  @override
+  Future<void> deletePostById(String postId) {
+    // TODO: Delete the post locally or from the remote datasourse (database)
+    return localFeedDatasource.deletePostById(postId);
+  }
 }
