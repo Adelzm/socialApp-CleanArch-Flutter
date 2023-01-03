@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:social_media_clean_archi/src/features/chat/data/datasource/local_chat_datasource.dart';
+import 'package:social_media_clean_archi/src/features/chat/data/datasource/mock_chat_datasource.dart';
 import 'package:social_media_clean_archi/src/features/chat/data/models/chat_model.dart';
 import 'package:social_media_clean_archi/src/features/chat/data/models/message_model.dart';
+import 'package:social_media_clean_archi/src/features/chat/data/repo/chat_repo_imp.dart';
 import 'package:social_media_clean_archi/src/features/feed/data/datasources/local_feed_datasource.dart';
 import 'package:social_media_clean_archi/src/shared/data/models/post_model.dart';
 import 'package:social_media_clean_archi/src/shared/data/models/user_model.dart';
@@ -55,6 +58,12 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => UserRepositoryImp(
             MockFeedDataSourceImpl(),
+          ),
+        ),
+        RepositoryProvider(
+          create: (context) => ChatRepoImp(
+            MockChatDatasourceImpl(),
+            LocalChatDatasourceImp(),
           ),
         ),
       ],
