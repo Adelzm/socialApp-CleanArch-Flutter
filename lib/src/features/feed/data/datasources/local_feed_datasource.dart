@@ -1,11 +1,14 @@
 import 'package:hive/hive.dart';
 import 'package:social_media_clean_archi/src/shared/data/models/post_model.dart';
 import 'package:social_media_clean_archi/src/shared/domain/entities/post_entity.dart';
+import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.dart';
 
 abstract class LocalFeedDatasource {
   Future<void> addPosts(PostEntity post);
-  Future<void> deleteAllPosts();
   Future<List<PostEntity>> getPosts();
+  Future<List<PostEntity>> getPostsByUser(String userId);
+  Future<void> deleteAllPosts();
+  Future<void> deletePostById(String postId);
 }
 
 class LocalFeedDatasourceImp implements LocalFeedDatasource {
@@ -28,6 +31,22 @@ class LocalFeedDatasourceImp implements LocalFeedDatasource {
   Future<List<PostEntity>> getPosts() async {
     Box<PostModel> box = await _openBox() as Box<PostModel>;
     return box.values.toList().map((post) => post.toEntity()).toList();
+  }
+
+  @override
+  Future<List<PostEntity>> getPostsByUser(String userId) async {
+    Box<PostModel> box = await _openBox() as Box<PostModel>;
+    return box.values
+        .where((post) => post.userModel.id == userId)
+        .toList()
+        .map((post) => post.toEntity())
+        .toList();
+  }
+
+  @override
+  Future<void> deletePostById(String postId) async {
+    Box box = await _openBox();
+    await box.delete(postId);
   }
 
   Future<Box> _openBox() async {

@@ -40,7 +40,7 @@ class UserModel {
       username: userEntity.username.value,
       imagePath: userEntity.imagePath,
       followings: userEntity.followings,
-      followrs: userEntity.followrs,
+      followrs: userEntity.followers,
     );
   }
 
@@ -50,7 +50,7 @@ class UserModel {
       username: Username.dirty(username),
       imagePath: imagePath,
       followings: followings,
-      followrs: followrs,
+      followers: followrs,
     );
   }
 }

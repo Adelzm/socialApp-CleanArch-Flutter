@@ -28,6 +28,27 @@ class PostRepositoryImp implements PostRepository {
 
   @override
   Future<List<PostEntity>> getPostByUser(userId) async {
-    return mockFeedDataSource.getPostsByUser(userId);
+    //return mockFeedDataSource.getPostsByUser(userId);
+    if ((await localFeedDatasource.getPostsByUser(userId)).isEmpty) {
+      List<PostEntity> posts = await mockFeedDataSource.getPostsByUser(userId);
+      for (final post in posts) {
+        localFeedDatasource.addPosts(post);
+      }
+      return posts;
+    } else {
+      debugPrint('Retrieving data form Hive');
+      return localFeedDatasource.getPostsByUser(userId);
+    }
+  }
+
+  @override
+  Future<void> createPost(PostEntity post) {
+    return localFeedDatasource.addPosts(post);
+  }
+
+  @override
+  Future<void> deletePostById(String postId) {
+    // TODO: Delete the post locally or from the remote datasourse (database)
+    return localFeedDatasource.deletePostById(postId);
   }
 }

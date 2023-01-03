@@ -4,21 +4,21 @@ import 'package:formz/formz.dart';
 class UserEntity extends Equatable {
   final String id;
   final Username username;
-  final int followrs;
+  final int followers;
   final int followings;
   final String? imagePath;
 
   const UserEntity(
       {required this.id,
       required this.username,
-      this.followrs = 0,
+      this.followers = 0,
       this.followings = 0,
       this.imagePath});
 
   static const empty = UserEntity(id: 'user_0', username: Username.pure());
 
   @override
-  List<Object?> get props => [id, username, followrs, followings, imagePath];
+  List<Object?> get props => [id, username, followers, followings, imagePath];
 }
 
 enum UsernameValidationError { invalid }

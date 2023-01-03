@@ -1,8 +1,7 @@
-import 'package:social_media_clean_archi/src/features/feed/domain/repo/post_repository.dart';
-import 'package:social_media_clean_archi/src/features/feed/domain/repo/user_repository.dart';
-import 'package:social_media_clean_archi/src/shared/domain/entities/post_entity.dart';
-import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.dart';
-import 'package:social_media_clean_archi/src/shared/domain/usecases/usecases.dart';
+import '../../../../shared/domain/entities/post_entity.dart';
+import '../../../../shared/domain/entities/user_entity.dart';
+import '../../../../shared/domain/usecases/usecases.dart';
+import '../repo/user_repository.dart';
 
 class GetUsers implements UseCase<List<PostEntity>, NoParams> {
   final UserRepository postRepository;

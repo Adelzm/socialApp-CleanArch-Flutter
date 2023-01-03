@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
-import 'package:social_media_clean_archi/src/features/auth/domain/entities/signed_in_user_entity.dart';
-import 'package:social_media_clean_archi/src/features/auth/presentation/blocs/signin/signin_cubit.dart';
 
 import '../../../../shared/presentation/widgets/widgets.dart';
+import '../blocs/signin/signin_cubit.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});

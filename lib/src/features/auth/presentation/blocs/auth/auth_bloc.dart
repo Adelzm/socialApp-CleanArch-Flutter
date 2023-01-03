@@ -51,7 +51,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return emit(const AuthState.unknown());
       case AuthStatus.authenticated:
         final user = await _getSignedInUser(NoParams());
-        print(user);
         return emit(AuthState.authenticated(user: user));
     }
   }

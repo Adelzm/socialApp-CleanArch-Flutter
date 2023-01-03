@@ -32,7 +32,7 @@ class _FeedScreenState extends State<FeedScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,
                 children: state.posts.map((post) {
-                  return CustomVideoPlayController(
+                  return CustomVideoPlayer(
                     assetPath: post.assetPath,
                     caption: post.caption,
                     username: post.user.username.value,

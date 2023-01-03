@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_clean_archi/src/shared/presentation/widgets/custom_gradient_overlay.dart';
 import 'package:video_player/video_player.dart';
+import 'dart:io';
 
-class CustomVideoPlayController extends StatefulWidget {
+class CustomVideoPlayer extends StatefulWidget {
   final String assetPath;
   final String? caption;
   final String? username;
 
-  const CustomVideoPlayController({
+  const CustomVideoPlayer({
     super.key,
     required this.assetPath,
     this.caption,
@@ -15,16 +16,20 @@ class CustomVideoPlayController extends StatefulWidget {
   });
 
   @override
-  State<CustomVideoPlayController> createState() =>
-      _CustomVideoPlayControllerState();
+  State<CustomVideoPlayer> createState() => _CustomVideoPlayerState();
 }
 
-class _CustomVideoPlayControllerState extends State<CustomVideoPlayController> {
+class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   late VideoPlayerController _videoPlayerController;
 
   @override
   void initState() {
-    _videoPlayerController = VideoPlayerController.asset(widget.assetPath);
+    if (widget.assetPath.startsWith('assets')) {
+      _videoPlayerController = VideoPlayerController.asset(widget.assetPath);
+    } else {
+      _videoPlayerController =
+          VideoPlayerController.file(File(widget.assetPath));
+    }
     _videoPlayerController.initialize().then((_) => setState(() {}));
     _videoPlayerController.setLooping(true);
     _videoPlayerController.play();
