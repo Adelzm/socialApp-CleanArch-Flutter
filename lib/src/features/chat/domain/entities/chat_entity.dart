@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
-import 'package:social_media_clean_archi/src/features/chat/domain/entities/message.dart';
+import 'package:social_media_clean_archi/src/features/chat/domain/entities/message_entity.dart';
 import 'package:social_media_clean_archi/src/shared/domain/entities/user_entity.dart';
 
-class Chat extends Equatable {
+class ChatEntity extends Equatable {
   final String id;
   final UserEntity currentUser;
   final UserEntity otherUser;
-  final List<Message>? messages;
+  final List<MessageEntity>? messages;
 
-  const Chat({
+  const ChatEntity({
     required this.id,
     required this.currentUser,
     required this.otherUser,
@@ -23,9 +23,9 @@ class Chat extends Equatable {
         messages,
       ];
 
-  Chat copyWith(String? id, UserEntity? currentUser, UserEntity? otherUser,
-      List<Message>? messages) {
-    return Chat(
+  ChatEntity copyWith(String? id, UserEntity? currentUser,
+      UserEntity? otherUser, List<MessageEntity>? messages) {
+    return ChatEntity(
         id: id ?? this.id,
         currentUser: currentUser ?? this.currentUser,
         otherUser: otherUser ?? this.otherUser,

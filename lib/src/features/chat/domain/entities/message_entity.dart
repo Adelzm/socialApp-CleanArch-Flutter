@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-class Message extends Equatable {
+class MessageEntity extends Equatable {
   final String chatId;
   final String senderId;
   final String recipientId;
   final String text;
   final DateTime createdAt;
 
-  const Message({
+  const MessageEntity({
     required this.chatId,
     required this.senderId,
     required this.recipientId,
