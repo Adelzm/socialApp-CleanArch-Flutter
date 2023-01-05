@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:social_media_clean_archi/src/features/auth/data/datasource/mock_auth_datasource.dart';
+import 'package:social_media_clean_archi/src/features/chat/data/repo/chat_repo_imp.dart';
+import 'package:social_media_clean_archi/src/features/chat/domain/repos/chat_repo.dart';
+import 'package:social_media_clean_archi/src/features/chat/domain/usecases/get_chat_by_id.dart';
+import 'package:social_media_clean_archi/src/features/chat/domain/usecases/get_chat_by_user.dart';
+import 'package:social_media_clean_archi/src/features/chat/presentation/blocs/chat_list/chat_list_bloc.dart';
+import 'package:social_media_clean_archi/src/features/chat/presentation/views/chat_list_screen.dart';
 import 'package:social_media_clean_archi/src/features/content/domain/usecases/create_post.dart';
 import 'package:social_media_clean_archi/src/features/content/domain/usecases/delete_post.dart';
 import 'package:social_media_clean_archi/src/features/content/presentation/blocs/add_content/add_content_cubit.dart';
@@ -109,6 +115,22 @@ class AppRouter {
                   return const SignUpScreen();
                 })
           ]),
+      GoRoute(
+          name: 'chats',
+          path: '/chats',
+          builder: (BuildContext context, GoRouterState state) {
+            return BlocProvider(
+              create: (context) => ChatListBloc(
+                GetChatByUser(
+                  context.read<ChatRepoImp>(),
+                ),
+              )..add(
+                  ChatListGetChats(
+                      userId: context.read<AuthBloc>().state.user.id),
+                ),
+              child: const ChatListScreen(),
+            );
+          }),
     ],
     redirect: (BuildContext context, GoRouterState state) {
       const signinLocation = '/signin';
